@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Showtimes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #f4f4f4;
+        }
+
+        .header {
+            background: linear-gradient(to right, #1a1a1a, #333);
+            color: white;
+            padding: 1rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .date-picker {
+            background: white;
+            padding: 1rem 0;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .date-slider {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px;
+        }
+
+        .date-item {
+            min-width: 100px;
+            padding: 10px;
+            text-align: center;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .date-item.active {
+            background: #e50914;
+            color: white;
+            border-color: #e50914;
+        }
+
+        .movie-section {
+            margin: 30px 0;
+        }
+
+        .movie-card {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .movie-info {
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .movie-poster {
+            width: 140px;
+            height: 200px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        .movie-details {
+            flex: 1;
+        }
+
+        .movie-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .movie-meta {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .movie-genres {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .genre-tag {
+            background: #f0f0f0;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .showtime-section {
+            background: #f9f9f9;
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .cinema-type {
+            margin-bottom: 15px;
+        }
+
+        .cinema-label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .time-slots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .time-slot {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .time-slot:hover {
+            background: #e50914;
+            color: white;
+            border-color: #e50914;
+        }
+
+        .seats-left {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .movie-info {
+                flex-direction: column;
+            }
+
+            .movie-poster {
+                width: 100%;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>Movie Showtimes</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="date-picker">
+            <div class="date-slider" id="dateSlider">
+                <!-- Dates will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="movie-section" id="movieSection">
+            <!-- Movies will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Generate dates for the next 7 days
+        function generateDates() {
+            const dateSlider = document.getElementById('dateSlider');
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            for (let i = 0; i < 7; i++) {
+                const date = new Date();
+                date.setDate(date.getDate() + i);
+                
+                const dateItem = document.createElement('div');
+                dateItem.className = `date-item ${i === 0 ? 'active' : ''}`;
+                dateItem.innerHTML = `
+                    <div>${days[date.getDay()]}</div>
+                    <div>${date.getDate()}</div>
+                    <div>${months[date.getMonth()]}</div>
+                `;
+                dateSlider.appendChild(dateItem);
+
+                dateItem.addEventListener('click', () => {
+                    document.querySelectorAll('.date-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    dateItem.classList.add('active');
+                    loadMovies(date);
+                });
+            }
+        }
+
+        // Sample movie data
+        const movies = [
+            {
+                title: "Avengers: Endgame",
+                poster: "/api/placeholder/140/200",
+                duration: "3h 2min",
+                rating: "PG-13",
+                genres: ["Action", "Adventure", "Sci-Fi"],
+                formats: {
+                    "IMAX": ["10:30 AM", "2:00 PM", "5:30 PM", "9:00 PM"],
+                    "Standard": ["11:00 AM", "1:30 PM", "4:00 PM", "6:30 PM", "9:30 PM"]
+                }
+            },
+            {
+                title: "The Dark Knight",
+                poster: "/api/placeholder/140/200",
+                duration: "2h 32min",
+                rating: "PG-13",
+                genres: ["Action", "Crime", "Drama"],
+                formats: {
+                    "IMAX": ["11:30 AM", "3:00 PM", "6:30 PM", "10:00 PM"],
+                    "Standard": ["12:00 PM", "2:30 PM", "5:00 PM", "7:30 PM", "10:30 PM"]
+                }
+            }
+        ];
+
+        function loadMovies(date) {
+            const movieSection = document.getElementById('movieSection');
+            movieSection.innerHTML = '';
+
+            movies.forEach(movie => {
+                const movieCard = document.createElement('div');
+                movieCard.className = 'movie-card';
+                movieCard.innerHTML = `
+                    <div class="movie-info">
+                        <img src="${movie.poster}" alt="${movie.title}" class="movie-poster">
+                        <div class="movie-details">
+                            <h2 class="movie-title">${movie.title}</h2>
+                            <div class="movie-meta">${movie.duration} | ${movie.rating}</div>
+                            <div class="movie-genres">
+                                ${movie.genres.map(genre => `
+                                    <span class="genre-tag">${genre}</span>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="showtime-section">
+                        ${Object.entries(movie.formats).map(([format, times]) => `
+                            <div class="cinema-type">
+                                <div class="cinema-label">${format}</div>
+                                <div class="time-slots">
+                                    ${times.map(time => `
+                                        <div class="time-slot">
+                                            <div>${time}</div>
+                                            <div class="seats-left">86 seats left</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                movieSection.appendChild(movieCard);
+            });
+
+            // Add click handlers for time slots
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                slot.addEventListener('click', () => {
+                    window.location.href = '/booking';  // Redirect to booking page
+                });
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            generateDates();
+            loadMovies(new Date());
+        });
+    </script>
+</body>
+</html>

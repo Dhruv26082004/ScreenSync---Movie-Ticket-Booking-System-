@@ -1,0 +1,486 @@
+<html>
+
+<head>
+    <title>
+        Event in Movie Ticket Booking
+    </title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+    <style>
+        .footer {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 60px 0 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 50px;
+            height: 2px;
+            background: #e50914;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #e50914;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #e50914;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            background: #333;
+            color: white;
+        }
+
+        .newsletter-form button {
+            padding: 10px 20px;
+            background: #e50914;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background: #cc0812;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .app-badges {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .app-badge {
+            background: #333;
+            padding: 8px 15px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .app-badge:hover {
+            background: #444;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-roboto">
+    <nav class="bg-black shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="index.html">
+                    <img alt="Logo of the movie ticket booking website" class="h-10" src="image/logo.png" />
+                </a>
+                <ul class="flex space-x-4 ml-6">
+                    <li>
+                        <a class="text-gray-100 hover:text-red-500" href="movies.html">
+                            Movies
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-gray-100 hover:text-red-500" href="events.html">
+                            Events
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-gray-100 hover:text-red-500" href="#">
+                            Plays
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-gray-100 hover:text-red-500" href="#">
+                            Sports
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-gray-100 hover:text-red-500" href="#">
+                            Activities
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div>
+                    <input type="text" placeholder="Search..." class="p-1 rounded-lg">
+                    <button class="bg-red-500 text-white p-2 rounded-lg"><i class="fas fa-search"></i></button>
+                </div>
+                <a class="text-gray-100 hover:text-red-500" href="login.html">
+                    Login
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold text-center mb-8">
+            Event in Movie Ticket Booking
+        </h1>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold mb-4">
+                Upcoming Events
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Event 1 -->
+                <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                    <img alt="Event 1: A vibrant movie poster with action scenes"
+                        class="w-full h-48 object-cover rounded-md mb-4" src="image/bb.jpeg" />
+                    <h3 class="text-xl font-bold mb-2">
+                        Action Movie Night
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        Join us for an action-packed movie night featuring the latest blockbuster hits. Don't miss out
+                        on the excitement!
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-calendar-alt">
+                        </i>
+                        Date: 25th October 2023
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-clock">
+                        </i>
+                        Time: 7:00 PM
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-map-marker-alt">
+                        </i>
+                        Venue: Main Theater
+                    </p>
+                    <a href="events_booking.html">
+                    <button class="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700">
+                        Book Now
+                    </button>
+                    </a>
+                </div>
+                <!-- Event 2 -->
+                <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                    <img alt="Event 2: A romantic movie poster with a couple in love"
+                        class="w-full h-48 object-cover rounded-md mb-4" src="image/bharat1.png" />
+                    <h3 class="text-xl font-bold mb-2">
+                        Romantic Movie Marathon
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        Experience a night of romance with a marathon of the most beloved romantic movies. Perfect for a
+                        date night!
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-calendar-alt">
+                        </i>
+                        Date: 30th October 2023
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-clock">
+                        </i>
+                        Time: 6:00 PM
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-map-marker-alt">
+                        </i>
+                        Venue: Hall 2
+                    </p>
+                    <a href="events_booking.html">
+                        <button class="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700">
+                            Book Now
+                        </button>
+                    </a>
+                </div>
+                <!-- Event 3 -->
+                <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                    <img alt="Event 3: A comedy movie poster with a group of friends laughing"
+                        class="w-full h-48 object-cover rounded-md mb-4" src="image/bharat2.png" />
+                    <h3 class="text-xl font-bold mb-2">
+                        Comedy Movie Fest
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        Laugh out loud with a selection of the funniest comedy movies. Bring your friends and enjoy a
+                        night of humor!
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-calendar-alt">
+                        </i>
+                        Date: 5th November 2023
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-clock">
+                        </i>
+                        Time: 8:00 PM
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-map-marker-alt">
+                        </i>
+                        Venue: Hall 3
+                    </p>
+                    <a href="events_booking.html">
+                        <button class="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700">
+                            Book Now
+                        </button>
+                    </a>
+                </div>
+                <!-- Event 4 -->
+                <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                    <img alt="Event 4: A horror movie poster with a spooky scene"
+                        class="w-full h-48 object-cover rounded-md mb-4" src="image/commando.jpeg" />
+                    <h3 class="text-xl font-bold mb-2">
+                        Horror Movie Night
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        Get ready for a spine-chilling night with the scariest horror movies. Not for the faint-hearted!hds sha ja nx hjk,hishd
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-calendar-alt">
+                        </i>
+                        Date: 10th November 2023
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-clock">
+                        </i>
+                        Time: 9:00 PM
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-map-marker-alt">
+                        </i>
+                        Venue: Hall 4
+                    </p>
+                    <a href="events_booking.html">
+                        <button class="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700">
+                            Book Now
+                        </button>
+                    </a>
+                </div>
+                <!-- Event 5 -->
+                <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                    <img alt="Event 5: A sci-fi movie poster with futuristic elements"
+                        class="w-full h-48 object-cover rounded-md mb-4" src="image/commando2.jpeg" />
+                    <h3 class="text-xl font-bold mb-2">
+                        Sci-Fi Movie Marathon
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        Dive into the world of science fiction with a marathon of the best sci-fi movies. A must-watch
+                        for sci-fi fans!
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-calendar-alt">
+                        </i>
+                        Date: 15th November 2023
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-clock">
+                        </i>
+                        Time: 7:00 PM
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-map-marker-alt">
+                        </i>
+                        Venue: Main Theater
+                    </p>
+                    <a href="events_booking.html">
+                        <button class="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700">
+                            Book Now
+                        </button>
+                    </a>
+                </div>
+                <!-- Event 6 -->
+                <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                    <img alt="Event 6: A family movie poster with a happy family"
+                        class="w-full h-48 object-cover rounded-md mb-4" src="image/commando3.png" />
+                    <h3 class="text-xl font-bold mb-2">
+                        Family Movie Day
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        Bring the whole family for a day of fun and entertainment with family-friendly movies. Perfect
+                        for all ages!
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-calendar-alt">
+                        </i>
+                        Date: 20th November 2023
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-clock">
+                        </i>
+                        Time: 3:00 PM
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-map-marker-alt">
+                        </i>
+                        Venue: Hall 1
+                    </p>
+                    <a href="events_booking.html">
+                        <button class="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700">
+                            <a href href="events_booking.html">Book Now</a>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Now Showing</a></li>
+                    <li><a href="#">Coming Soon</a></li>
+                    <li><a href="#">Buy Tickets</a></li>
+                    <li><a href="#">Cinemas</a></li>
+                    <li><a href="#">Special Offers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Information</h3>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+                <div style="margin-top: 20px;">
+                    <h3>Download Our App</h3>
+                    <div class="app-badges">
+                        <a href="#" class="app-badge">
+                            <i class="fab fa-apple"></i>
+                            App Store
+                        </a>
+                        <a href="#" class="app-badge">
+                            <i class="fab fa-google-play"></i>
+                            Google Play
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p style="color: #999; margin-bottom: 15px;">Subscribe to get special offers and movie updates</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 MovieMax. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+
+</html>

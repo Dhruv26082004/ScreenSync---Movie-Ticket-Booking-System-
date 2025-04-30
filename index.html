@@ -1,0 +1,561 @@
+<html>
+
+<head>
+    <title>
+        Movie Ticket Booking - Home
+    </title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .slider {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .slider .prev,
+        .slider .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .slider .prev {
+            left: 10px;
+        }
+
+        .slider .next {
+            right: 10px;
+        }
+
+        .footer {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 60px 0 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 50px;
+            height: 2px;
+            background: #e50914;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #e50914;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #e50914;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            background: #333;
+            color: white;
+        }
+
+        .newsletter-form button {
+            padding: 10px 20px;
+            background: #e50914;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background: #cc0812;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .app-badges {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .app-badge {
+            background: #333;
+            padding: 8px 15px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .app-badge:hover {
+            background: #444;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        form button {
+            background-color: var(--tomato-color);
+            border: none;
+            color: var(--white-color);
+            font-size: var(--font-12px);
+            letter-spacing: 1px;
+            font-weight: 400;
+            width: 65px;
+            height: 25px;
+            border-radius: 5px;
+        }
+
+        /* From Uiverse.io by OnlyCodeChannel */
+        .searchBox {
+            display: flex;
+            max-width: 230px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 7px;
+            background: #2f3640;
+            border-radius: 50px;
+            position: relative;
+        }
+
+        .searchButton {
+            color: white;
+            position: absolute;
+            right: 8px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--gradient-2, linear-gradient(90deg, #2AF598 0%, #009EFD 100%));
+            border: 0;
+            display: inline-block;
+            transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+        }
+
+        /*hover effect*/
+        button:hover {
+            color: #fff;
+            background-color: #1A1A1A;
+            box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
+            transform: translateY(-3px);
+        }
+
+        /*button pressing effect*/
+        button:active {
+            box-shadow: none;
+            transform: translateY(0);
+        }
+
+        .searchInput {
+            border: none;
+            background: none;
+            outline: none;
+            color: white;
+            font-size: 15px;
+            padding: 7px 46px 3px 28px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <nav class="bg-black shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="index.html">
+                    <img alt="Logo of the movie ticket booking website" class="h-10" src="image/logo.png" />
+                </a>
+                <ul class="flex space-x-4 ml-6">
+                    <li>
+                        <a class="text-gray-100 hover:text-red-500" href="movies.html">
+                            Movies
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-gray-100 hover:text-red-500" href="events.html">
+                            Events
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-gray-100 hover:text-red-500" href="#">
+                            Plays
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-gray-100 hover:text-red-500" href="#">
+                            Sports
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-gray-100 hover:text-red-500" href="#">
+                            Activities
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="flex items-center space-x-4">
+                <!-- From Uiverse.io by OnlyCodeChannel -->
+                <div class="searchBox">
+
+                    <input class="searchInput" type="text" name="" placeholder="Search something">
+                    <button class="searchButton" href="#">
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
+                            <g clip-path="url(#clip0_2_17)">
+                                <g filter="url(#filter0_d_2_17)">
+                                    <path
+                                        d="M23.7953 23.9182L19.0585 19.1814M19.0585 19.1814C19.8188 18.4211 20.4219 17.5185 20.8333 16.5251C21.2448 15.5318 21.4566 14.4671 21.4566 13.3919C21.4566 12.3167 21.2448 11.252 20.8333 10.2587C20.4219 9.2653 19.8188 8.36271 19.0585 7.60242C18.2982 6.84214 17.3956 6.23905 16.4022 5.82759C15.4089 5.41612 14.3442 5.20435 13.269 5.20435C12.1938 5.20435 11.1291 5.41612 10.1358 5.82759C9.1424 6.23905 8.23981 6.84214 7.47953 7.60242C5.94407 9.13789 5.08145 11.2204 5.08145 13.3919C5.08145 15.5634 5.94407 17.6459 7.47953 19.1814C9.01499 20.7168 11.0975 21.5794 13.269 21.5794C15.4405 21.5794 17.523 20.7168 19.0585 19.1814Z"
+                                        stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                                        shape-rendering="crispEdges"></path>
+                                </g>
+                            </g>
+                            <defs>
+                                <filter id="filter0_d_2_17" x="-0.418549" y="3.70435" width="29.7139" height="29.7139"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha">
+                                    </feColorMatrix>
+                                    <feOffset dy="4"></feOffset>
+                                    <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+                                    <feComposite in2="hardAlpha" operator="out"></feComposite>
+                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0">
+                                    </feColorMatrix>
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2_17">
+                                    </feBlend>
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2_17"
+                                        result="shape"></feBlend>
+                                </filter>
+                                <clipPath id="clip0_2_17">
+                                    <rect width="28.0702" height="28.0702" fill="white"
+                                        transform="translate(0.403503 0.526367)"></rect>
+                                </clipPath>
+                            </defs>
+                        </svg>
+
+
+                    </button>
+                </div>
+
+
+
+                <a class="text-gray-100 hover:text-red-500" href="login.html">
+                    Login
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Slider Section -->
+    <div class="slider relative">
+        <img alt="Slider image 1 showing a popular movie scene" src="image/banner1.jpg" />
+        <img alt="Slider image 2 showing another popular movie scene" src="image/banner2.jpg" />
+        <img alt="Slider image 3 showing yet another popular movie scene" src="image/banner3.jpg" />
+        <img alt="Slider image 4 showing yet another popular movie scene" src="image/banner4.jpg" />
+        <div class="prev" onclick="plusSlides(0)">
+            ❮
+        </div>
+        <div class="next" onclick="plusSlides(0)">
+            ❯
+        </div>
+    </div>
+    <!-- Now Showing Section -->
+    <div class="container mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold mb-4">
+            Now Showing
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                <img alt="Poster of Movie 1" class="w-full h-64 object-cover" src="image/n1.jpg" />
+                <div class="p-4">
+                    <h3 class="text-lg font-bold">
+                        Movie 1
+                    </h3>
+                    <p class="text-gray-600">
+                        Action, Adventure
+                    </p>
+                </div>
+            </div>
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                <img alt="Poster of Movie 2" class="w-full h-64 object-cover" src="image/n2.jpg" />
+                <div class="p-4">
+                    <h3 class="text-lg font-bold">
+                        Movie 2
+                    </h3>
+                    <p class="text-gray-600">
+                        Drama, Romance
+                    </p>
+                </div>
+            </div>
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                <img alt="Poster of Movie 3" class="w-full h-64 object-cover" src="image/gujjubhai.jpeg" />
+                <div class="p-4">
+                    <h3 class="text-lg font-bold">
+                        Movie 3
+                    </h3>
+                    <p class="text-gray-600">
+                        Comedy, Family
+                    </p>
+                </div>
+            </div>
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                <img alt="Poster of Movie 4" class="w-full h-64 object-cover" src="image/wednesday.jpeg" />
+                <div class="p-4">
+                    <h3 class="text-lg font-bold">
+                        Movie 4
+                    </h3>
+                    <p class="text-gray-600">
+                        Horror, Thriller
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- New Releases Section -->
+    <div class="container mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold mb-4">
+            New Releases
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                <img alt="Poster of New Release 1" class="w-full h-64 object-cover" src="image/Thaijase.png" />
+                <div class="p-4">
+                    <h3 class="text-lg font-bold">
+                        New Release 1
+                    </h3>
+                    <p class="text-gray-600">
+                        Action, Sci-Fi
+                    </p>
+                </div>
+            </div>
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                <img alt="Poster of New Release 2" class="w-full h-64 object-cover" src="image/n6.jpg" />
+                <div class="p-4">
+                    <h3 class="text-lg font-bold">
+                        New Release 2
+                    </h3>
+                    <p class="text-gray-600">
+                        Drama, Biography
+                    </p>
+                </div>
+            </div>
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                <img alt="Poster of New Release 3" class="w-full h-64 object-cover" src="image/n5.jpg" />
+                <div class="p-4">
+                    <h3 class="text-lg font-bold">
+                        New Release 3
+                    </h3>
+                    <p class="text-gray-600">
+                        Comedy, Romance
+                    </p>
+                </div>
+            </div>
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                <img alt="Poster of New Release 4" class="w-full h-64 object-cover" src="image/n6.jpg" />
+                <div class="p-4">
+                    <h3 class="text-lg font-bold">
+                        New Release 4
+                    </h3>
+                    <p class="text-gray-600">
+                        Thriller, Mystery
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Now Showing</a></li>
+                        <li><a href="#">Coming Soon</a></li>
+                        <li><a href="#">Buy Tickets</a></li>
+                        <li><a href="#">Cinemas</a></li>
+                        <li><a href="#">Special Offers</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Information</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <h3>Download Our App</h3>
+                        <div class="app-badges">
+                            <a href="#" class="app-badge">
+                                <i class="fab fa-apple"></i>
+                                App Store
+                            </a>
+                            <a href="#" class="app-badge">
+                                <i class="fab fa-google-play"></i>
+                                Google Play
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p style="color: #999; margin-bottom: 15px;">Subscribe to get special offers and movie updates</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 MovieMax. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Add Font Awesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let slides = document.querySelectorAll('.slider img');
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = 'none';
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex - 1].style.display = 'block';
+            setTimeout(showSlides, 4000); // Change image every 3 seconds
+        }
+
+        function plusSlides(n) {
+            slideIndex += n - 1;
+            showSlides();
+        }
+    </script>
+</body>
+
+</html>

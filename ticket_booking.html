@@ -1,0 +1,167 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Movie Booking Page
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+ </head>
+ <body class="bg-gray-100 font-roboto">
+    <nav class="bg-black shadow-md">
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+         <div class="flex items-center">
+          <img alt="Logo of the movie ticket booking website" class="h-10" src="image/logo.png"/>
+          <ul class="flex space-x-4 ml-6">
+           <li>
+            <a class="text-gray-100 hover:text-red-500" href="movies.html">
+             Movies
+            </a>
+           </li>
+           <li>
+            <a class="text-gray-100 hover:text-red-500" href="#">
+             Events
+            </a>
+           </li>
+           <li>
+            <a class="text-gray-100 hover:text-red-500" href="#">
+             Plays
+            </a>
+           </li>
+           <li>
+            <a class="text-gray-100 hover:text-red-500" href="#">
+             Sports
+            </a>
+           </li>
+           <li>
+            <a class="text-gray-100 hover:text-red-500" href="#">
+             Activities
+            </a>
+           </li>
+          </ul>
+         </div>
+         <div class="flex items-center space-x-4">
+             <div>
+                 <input type="text" placeholder="Search..." class="p-1 rounded-lg">
+                 <button class="bg-red-500 text-white p-2 rounded-lg"><i class="fas fa-search"></i></button>
+             </div>
+          <a class="text-gray-100 hover:text-red-500" href="login.html">
+           Login
+          </a>
+          <a class="text-gray-100 hover:text-red-500" href="registration.html">
+           Sign Up
+          </a>
+         </div>
+        </div>
+       </nav>
+
+
+   <div class="bg-white shadow-md rounded-lg p-6 mt-6">
+    <h2 class="text-xl font-bold mb-4">Theater Layout</h2>
+    <div class="flex justify-center mb-4">
+        <div class="bg-gray-800 text-white py-2 px-4 rounded">Screen</div>
+    </div>
+    <div id="theaterLayout" class="grid grid-cols-10 gap-2">
+        <!-- Seats will be dynamically generated here -->
+    </div>
+</div>
+</div>
+<div class="bg-white shadow-md rounded-lg p-6">
+    <h1 class="text-2xl font-bold mb-4">Theater Seat Booking</h1>
+    <form id="seatBookingForm" class="space-y-4">
+        <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+            <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+        </div>
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input type="email" id="email" name="email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+        </div>
+        <div>
+            <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+            <input type="tel" id="phone" name="phone" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+        </div>
+        <div>
+            <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+            <textarea id="address" name="address" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required></textarea>
+        </div>
+        <div>
+            <label for="seats" class="block text-sm font-medium text-gray-700">Number of Seats</label>
+            <input type="number" id="seats" name="seats" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" min="1" required readonly>
+        </div>
+        <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600">Book Seats</button>
+    </form>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden">
+<div class="bg-white rounded-lg p-6 w-1/2">
+    <h2 class="text-xl font-bold mb-4">Booking Details</h2>
+    <p id="modalName" class="text-gray-700"></p>
+    <p id="modalEmail" class="text-gray-700"></p>
+    <p id="modalPhone" class="text-gray-700"></p>
+    <p id="modalAddress" class="text-gray-700"></p>
+    <p id="modalSeats" class="text-gray-700"></p>
+    <button id="closeModal" class="mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded-md hover:bg-red-600">Close</button>
+</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const rows = 10;
+    const cols = 10;
+    const theaterLayout = document.getElementById('theaterLayout');
+    const seatsInput = document.getElementById('seats');
+    let selectedSeats = 0;
+
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            const seat = document.createElement('div');
+            seat.className = 'bg-gray-300 p-2 rounded text-center cursor-pointer';
+            seat.textContent = String.fromCharCode(65 + i) + (j + 1);
+            seat.addEventListener('click', function() {
+                seat.classList.toggle('bg-green-500');
+                if (seat.classList.contains('bg-green-500')) {
+                    selectedSeats++;
+                } else {
+                    selectedSeats--;
+                }
+                seatsInput.value = selectedSeats;
+            });
+            theaterLayout.appendChild(seat);
+        }
+    }
+});
+
+document.getElementById('seatBookingForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const address = document.getElementById('address').value;
+    const seats = document.getElementById('seats').value;
+
+    document.getElementById('modalName').textContent = `Name: ${name}`;
+    document.getElementById('modalEmail').textContent = `Email: ${email}`;
+    document.getElementById('modalPhone').textContent = `Phone: ${phone}`;
+    document.getElementById('modalAddress').textContent = `Address: ${address}`;
+    document.getElementById('modalSeats').textContent = `Number of Seats: ${seats}`;
+
+    document.getElementById('modal').classList.remove('hidden');
+});
+
+document.getElementById('closeModal').addEventListener('click', function() {
+    document.getElementById('modal').classList.add('hidden');
+});
+</script>
+</body>
+</html>
+
+
+Upload Files
+
+ </body>
+</html>
